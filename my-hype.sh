@@ -1,4 +1,4 @@
-#!/bin/bash
+y#!/bin/bash
 
 # Check for internet connectivity
 check_for_internet() {
@@ -13,11 +13,8 @@ check_for_internet() {
 
 display_warning() {
     echo "The following packages will be installed:"
-    for pkg in "${arch_packages[@]}"; do
-        echo "Pacman package: $pkg"
-    done
-    for pkg in "${paru_packages[@]}"; do
-        echo "Paru package: $pkg"
+    for pkg in "${arch_packages[@]}" "${paru_packages[@]}"; do
+        echo "Package: $pkg"
     done
     echo "Do you want to continue? (Y/n)"
     read -r confirm
@@ -30,7 +27,7 @@ display_warning() {
 check_for_internet "$@"
 
 # Install the missing packages if we don't have them
-arch_packages=("git" "rust" "hyprland" "waybar" "firefox" "pipewire" "thunar" "wireplumber" "foot" "polkit-gnome" "xdg-desktop-portal-hyprland" "xdg-desktop-portal-gtk" "swaymsg" "pavucontrol" "ttf-font-awesome" "ttf-jetbrains-mono" "qt5-wayland" "qt6-wayland" "nwg-look" "papirus-icon-theme")
+arch_packages=("git" "rust" "hyprland" "waybar" "firefox" "file-roller" "pipewire" "thunar" "wireplumber" "foot" "polkit-gnome" "xdg-desktop-portal-hyprland" "xdg-desktop-portal-gtk" "swaymsg" "pavucontrol" "ttf-font-awesome" "ttf-jetbrains-mono" "qt5-wayland" "qt6-wayland" "nwg-look" "papirus-icon-theme")
 echo "Installing pacman pkgs: ${arch_packages[*]}"
 
 if [[ -f /etc/arch-release ]]; then
@@ -62,7 +59,6 @@ fi
 # Install aur packages
 paru_packages=("dracula-gtk-theme" "hyprshot" "swaync" "wlogout" "fuzzel" "hyprpaper" "blueberry" "network-manager-applet")
 echo "Installing aur pkgs: ${paru_packages[*]}"
-display_warning
 for package in "${paru_packages[@]}"; do
     if ! paru -Q "$package" >/dev/null 2>&1; then
         paru -S --noconfirm --needed "$package"
