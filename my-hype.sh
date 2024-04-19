@@ -95,8 +95,8 @@ fi
 install_sddm_theme() {
     if [ -f /usr/lib/sddm/sddm.conf.d/default.conf ]; then
         echo "Enabling monochrome sddm theme..."
-        sudo cp /usr/lib/sddm/sddm.conf.d/default.conf /usr/lib/sddm/sddm.conf.d/default.conf.backup
-        if sudo sed -i 's/Current=/Current=monochrome/' /usr/lib/sddm/sddm.conf.d/default.conf ; then
+        sudo cp /usr/lib/sddm/sddm.conf.d/default.conf /etc/sddm.conf
+        if sudo sed -i 's/Current=/Current=monochrome/' /etc/sddm.conf ; then
             echo "monochrome sddm theme enabled..."
         else
             echo "Failed to enable monochrome sddm theme. Exiting script."
