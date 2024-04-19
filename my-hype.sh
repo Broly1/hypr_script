@@ -94,13 +94,53 @@ fi
 
 git config --global core.editor "nano"
 
+# Enable Bluetooth
+enable_bluetooth() {
+	echo "Enabling Bluetooth..."
+	sudo cp /etc/bluetooth/main.conf /etc/bluetooth/main.conf.backup
+	if sudo sed -i 's/#AutoEnable=true/AutoEnable=true/' /etc/bluetooth/main.conf; then
+		sudo systemctl start bluetooth.service
+		sudo systemctl enable bluetooth.service
+		echo "Bluetooth configuration successful."
+	else
+		echo "Failed to enable Bluetooth. Exiting script."
+		exit 1
+	fi
+}
+
+# Configure zram swap
+configure_zram() {
+	echo "Enabling zram..."
+	sudo cp /etc/systemd/zram-generator.conf /etc/systemd/zram-generator.conf.backup
+	if sudo tee /etc/systemd/zram-generator.conf >/dev/null <<EOF
+[zram0]
+zram-size = ram
+EOF
+then
+	echo "zram configuration successful."
+else
+	echo "Failed to configure zram. Exiting script."
+	exit 1
+	fi
+}
+
+read -rp "Do you want to enable Bluetooth? (yes/no): " enable_bluetooth_prompt
+if [ "$enable_bluetooth_prompt" = "yes" ]; then
+	enable_bluetooth
+fi
+
+read -rp "Do you want to configure zram=ram zram? (yes/no): " configure_zram_prompt
+if [ "$configure_zram_prompt" = "yes" ]; then
+	configure_zram
+fi
+
+
 install_sddm_theme() {
 	if [ -f /usr/lib/sddm/sddm.conf.d/default.conf ]; then
 		echo "Enabling monochrome sddm theme..."
 		sudo cp /usr/lib/sddm/sddm.conf.d/default.conf /etc/sddm.conf
 		TMP_FILE=/tmp/sddm.conf.modified
-		sudo sed 's/Current=/Current=monochrome/' /etc/sddm.conf > $TMP_FILE
-		if [ $? -eq 0 ]; then
+		if sudo sed 's/Current=/Current=monochrome/' /etc/sddm.conf | sudo tee "$TMP_FILE" > /dev/null; then
 			sudo mv $TMP_FILE /etc/sddm.conf
 			echo "monochrome sddm theme enabled..."
 		else
