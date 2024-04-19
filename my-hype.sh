@@ -28,7 +28,7 @@ display_warning() {
 check_for_internet "$@"
 
 # Install the missing packages if we don't have them
-arch_packages=("git" "nano" "rust" "hyprland" "waybar" "firefox" "file-roller" "pipewire" "thunar" "thunar-archive-plugin" "gvfs" "wireplumber" "foot" "polkit-gnome" "xdg-desktop-portal-hyprland" "xdg-desktop-portal-gtk" "swaymsg" "pavucontrol" "ttf-font-awesome" "ttf-jetbrains-mono" "qt5-wayland" "qt6-wayland" "nwg-look" "papirus-icon-theme" "qt6-svg" "qt6-declarative")
+arch_packages=("git" "nano" "rust" "hyprland" "waybar" "firefox" "engrampa" "pipewire" "thunar" "thunar-archive-plugin" "gvfs" "wireplumber" "foot" "polkit-gnome" "xdg-desktop-portal-hyprland" "xdg-desktop-portal-gtk" "swaymsg" "pavucontrol" "ttf-font-awesome" "ttf-jetbrains-mono" "qt5-wayland" "qt6-wayland" "nwg-look" "papirus-icon-theme" "qt6-svg" "qt6-declarative")
 
 if [[ -f /etc/arch-release ]]; then
 	display_warning
