@@ -1,5 +1,6 @@
 #!/bin/bash
 
+clear
 # Check for internet connectivity
 check_for_internet() {
     clear
@@ -27,8 +28,7 @@ display_warning() {
 check_for_internet "$@"
 
 # Install the missing packages if we don't have them
-arch_packages=("git" "rust" "hyprland" "waybar" "firefox" "file-roller" "pipewire" "thunar" "wireplumber" "foot" "polkit-gnome" "xdg-desktop-portal-hyprland" "xdg-desktop-portal-gtk" "swaymsg" "pavucontrol" "ttf-font-awesome" "ttf-jetbrains-mono" "qt5-wayland" "qt6-wayland" "nwg-look" "papirus-icon-theme")
-echo "Installing pacman pkgs: ${arch_packages[*]}"
+arch_packages=("git" "rust" "hyprland" "waybar" "firefox" "file-roller" "pipewire" "thunar" "wireplumber" "foot" "polkit-gnome" "xdg-desktop-portal-hyprland" "xdg-desktop-portal-gtk" "swaymsg" "pavucontrol" "ttf-font-awesome" "ttf-jetbrains-mono" "qt5-wayland" "qt6-wayland" "nwg-look" "papirus-icon-theme" "qt6-svg" "qt6-declarative")
 
 if [[ -f /etc/arch-release ]]; then
     display_warning
