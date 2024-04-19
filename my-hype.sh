@@ -1,4 +1,4 @@
-y#!/bin/bash
+#!/bin/bash
 
 # Check for internet connectivity
 check_for_internet() {
@@ -77,10 +77,41 @@ for dir in "${directories[@]}"; do
     find ~/.config/"$dir" -type d -exec chmod +x {} +
 done
 
+# Enable bash color and 15 simultaneous Downloads
+if [ -f /etc/pacman.conf ]; then
+    echo "Enabling bash colors and simultaneous downloads..."
+    sudo cp /etc/pacman.conf /etc/pacman.conf.backup
+    if sudo sed -i 's/#Color/Color/' /etc/pacman.conf && sudo sed -i 's/#ParallelDownloads = 5/ParallelDownloads = 15/' /etc/pacman.conf; then
+        echo "Bash color and ParallelDownloads enabled..."
+    else
+        echo "Failed to enable bash colors or ParallelDownloads. Exiting script."
+        exit 1
+    fi
+else
+    echo "pacman.conf not found. Exiting script."
+    exit 1
+fi
+
+install_sddm_theme() {
+    if [ -f /usr/lib/sddm/sddm.conf.d/default.conf ]; then
+        echo "Enabling monochrome sddm theme..."
+        sudo cp /usr/lib/sddm/sddm.conf.d/default.conf /usr/lib/sddm/sddm.conf.d/default.conf.backup
+        if sudo sed -i 's/Current=/Current=monochrome/' /usr/lib/sddm/sddm.conf.d/default.conf ; then
+            echo "monochrome sddm theme enabled..."
+        else
+            echo "Failed to enable monochrome sddm theme. Exiting script."
+            exit 1
+        fi
+    else
+        echo "default.conf not found. Exiting script."
+        exit 1
+    fi
+}
+
 # Desktop Manager Setup (optional)
 echo "Would you like to install the SDDM login manager?"
-echo "Note: If you're using GNOME desktop, skip this step."
-echo "      Only install SDDM if you are installing on vanilla arch with no Gnome or KDE desktop environments."
+echo "Note: If you're using GNOME or KDE desktop, skip this step."
+echo "Only install SDDM if you are installing on vanilla arch"
 echo "(Y/n)"
 read -r choice
 case "$choice" in
@@ -88,11 +119,13 @@ case "$choice" in
         echo "Installing SDDM..."
         sudo pacman -S --noconfirm sddm
         sudo systemctl enable sddm.service
+        install_sddm_theme "$@"
+        sudo cp -r monochrome/ /usr/share/sddm/themes/
         echo "SDDM installed and enabled."
+        cd ../
+        rm -rf hyprland-dots/
         ;;
     *)
         echo "Skipping SDDM setup."
         ;;
 esac
-
-
