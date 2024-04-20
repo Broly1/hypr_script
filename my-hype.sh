@@ -191,3 +191,10 @@ case "$choice" in
 		echo "Skipping SDDM setup."
 		;;
 esac
+
+# Set gtk + icons themes
+echo "Setting GTK theme and icon theme..."
+gsettings set org.gnome.desktop.interface gtk-theme Dracula
+gsettings set org.gnome.desktop.interface icon-theme Papirus-Dark
+
+exit 0
