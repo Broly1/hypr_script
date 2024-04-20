@@ -70,7 +70,7 @@ done
 git clone https://github.com/Broly1/hyprland-dots.git
 cd hyprland-dots || exit
 
-directories=("foot" "fuzzel" "hypr" "wallpaper" "waybar" "wlogout")
+directories=("foot" "fuzzel" "hypr" "wallpaper" "waybar" "wlogout" "Thunar")
 for dir in "${directories[@]}"; do
 	cp -r "$dir" ~/.config/
 	find ~/.config/"$dir" -type f -exec chmod +x {} +
