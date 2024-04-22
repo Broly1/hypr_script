@@ -196,3 +196,7 @@ esac
 echo "Setting GTK theme and icon theme..."
 gsettings set org.gnome.desktop.interface gtk-theme Dracula
 gsettings set org.gnome.desktop.interface icon-theme Papirus-Dark
+# Set Thunar as default for opening folders
+xdg-mime default thunar.desktop inode/directory
+
+
