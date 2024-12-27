@@ -47,11 +47,11 @@ fi
 # Install paru (AUR helper)
 if ! sudo pacman -Q paru >/dev/null 2>&1; then
 	echo "paru is not installed. Installing..."
-	git clone https://aur.archlinux.org/paru.git
-	cd paru || exit
-	makepkg -si
+	git clone https://aur.archlinux.org/paru-bin.git
+	cd paru-bin || exit
+	makepkg -si --noconfirm
 	cd ../
-	rm -rf paru/
+	rm -rf paru-bin/
 else
 	echo "paru is already installed."
 fi
