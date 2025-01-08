@@ -62,7 +62,7 @@ main() {
         "thunar-archive-plugin"
         "gvfs"
         "wireplumber"
-        "foot"
+        "ghostty"
         "polkit-gnome"
         "xdg-desktop-portal-hyprland"
         "xdg-desktop-portal"
@@ -89,6 +89,7 @@ main() {
         "fuzzel"
         "hyprpaper"
         "blueberry"
+        "vscodium-bin"
         "network-manager-applet"
     )
 
@@ -144,7 +145,7 @@ main() {
     cd hyprland-dots || exit
 
     directories=(
-        "foot"
+        "ghostty"
         "fuzzel"
         "hypr"
         "wallpaper"
