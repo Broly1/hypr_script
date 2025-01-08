@@ -202,7 +202,6 @@ EOF
     banner "$@"
     if ask_user "Do you want to enable ly login manager?"; then
         sudo systemctl enable ly.service
-        sudo sed -i 's/animation = none/animation = doom/' /etc/ly/config.ini || { echo "Failed to change ly animation."; exit 1; }      
         sudo sed -i 's/hide_borders = false/hide_borders = true/' /etc/ly/config.ini || { echo "Failed to change ly animation."; exit 1; }
        else
         echo "Skipping enabling ly."
