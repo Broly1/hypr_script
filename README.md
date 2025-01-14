@@ -4,10 +4,6 @@
 **Terminal**: Ghostty  
 **Wallpaper**: [Loop](https://basicappleguy.com/basicappleblog/strokes)
 
-## Screenshots  
-![Screenshot_20250111_114533|690x430](upload://Ad0BPGBG91RM6chbkdDZVXIGjGI.jpeg)  
-![Screenshot_20250111_114926|690x430](upload://pfwuUWWbA4DTHSzeLwL3SG9XqVL.jpeg)
-
 ### Additional Information :upside_down_face: :upside_down_face:  
 **Installation**:  
 Install minimal Archlinux with NetworkManager and PipeWire for audio.  
@@ -15,6 +11,8 @@ Use this [OneLiner](https://github.com/Broly1/hypr_script/blob/master/my-hype.sh
 <pre>
 <code>curl -o my-hype.sh https://raw.githubusercontent.com/Broly1/hypr_script/master/my-hype.sh && chmod +x my-hype.sh && ./my-hype.sh</code>
 </pre>  
+
+## Video
 https://files.catbox.moe/t6kl3h.mp4
 
 This script is an automated installer for Arch Linux systems, designed to set up a range of packages, settings, and customizations for the Hyprland desktop environment. It performs several tasks, including package installation, system and graphical environment configuration, and theme customizations. Below, I explain what each part of the script does:
